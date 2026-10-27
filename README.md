@@ -60,3 +60,54 @@ El archivo `main.py` comprueba automáticamente:
 3. Abre tu terminal o entorno de desarrollo (como VS Code) en la carpeta del proyecto y ejecuta:
    ```bash
    python main.py
+---
+Reto Extra 1 — Diagrama de clases UML
++------------------------------------+
+       | <<abstract>>                       |
+       |             Personaje              |
+       +------------------------------------+
+       | - _nombre: str                     |
+       | - _vida: int                       |
+       | - _ataque: int                     |
+       | - _defensa: int                    |
+       +------------------------------------+
+       | + recibir_danio(cantidad)          |
+       | + esta_vivo()                      |
+       | + mostrar_estado()                 |
+       | {abstract} + atacar(objetivo)      |
+       +------------------------------------+
+                     ^      ^      ^
+                     |      |      |
+         +-----------+      |      +-----------+
+         |                  |                  |
++-----------------+ +-----------------+ +-----------------+
+|    Guerrero     | |      Mago       | |     Arquero     |
++-----------------+ +-----------------+ +-----------------+
+| + atacar(obj)   | | + atacar(obj)   | | + atacar(obj)   |
++-----------------+ +-----------------+ +-----------------+
+
+                      +-------------------+
+                      |      Combate      |
+                      +-------------------+
+                      | - p1: Personaje   |
+                      | - p2: Personaje   |
+                      | - turno_actual    |
+                      | - ronda           |
+                      +-------------------+
+                      | + iniciar()       |
+                      | + cambiar_turno() |
+                      | + verificar_ganador()|
+                      +-------------------+
+                              ◇ 1..2
+                              |
+                          Personaje
+---
+Reto Extra 2 — Pruebas Automatizadas con Pytest
+Para verificar el código utilizando Pytest, puedes estructurar las pruebas en un archivo adicional o ejecutar validaciones unitarias automatizadas sobre los getters, setters y las reglas de daño especial de cada guardián.
+
+Reto Extra 3 — Desafío de Abstracción
+¿Por qué atacar() debe ser abstracto, pero recibir_danio() puede estar implementado en la clase base?
+
+atacar() es abstracto porque cada orden de guardián en Eldoria posee una mecánica de combate completamente distinta (el Guerrero multiplica su fuerza un 20%, el Mago ignora la defensa y el Arquero duplica su daño si supera la defensa enemiga). La clase Personaje sabe cuándo ocurre un ataque, pero no cómo lo ejecuta cada subclase específica.
+
+recibir_danio() está implementado en la base porque la lógica para restar puntos a la vida, validar que el daño no sea negativo y asegurar que la vida no baje de cero es idéntica y universal para cualquier personaje, sin importar su tipo. Esto fomenta la reutilización de código y evita la redundancia, manteniendo el principio DRY

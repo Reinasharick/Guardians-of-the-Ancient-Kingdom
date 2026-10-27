@@ -62,6 +62,7 @@ El archivo `main.py` comprueba automáticamente:
    python main.py
 ---
 Reto Extra 1 — Diagrama de clases UML
+
 +------------------------------------+
        | <<abstract>>                       |
        |             Personaje              |

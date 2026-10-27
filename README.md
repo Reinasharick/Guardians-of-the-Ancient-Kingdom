@@ -63,7 +63,10 @@ El archivo `main.py` comprueba automáticamente:
 ---
 Reto Extra 1 — Diagrama de clases UML
 
-+------------------------------------+
+### Reto Extra 1 — Diagrama de clases UML
+
+```text
+       +------------------------------------+
        | <<abstract>>                       |
        |             Personaje              |
        +------------------------------------+
